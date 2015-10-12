@@ -7,8 +7,8 @@ DATABASE='SCOPE'
 makeClient = ->
   client = mysql.createConnection(
     host: "localhost"
-    user: "root"
-    password: "s0c00l2014!"
+    user: ""
+    password: ""
     database: "SCOPE"
     insecureAuth: "true"
   )
