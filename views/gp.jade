@@ -1,0 +1,68 @@
+doctype html
+
+html
+    head
+        link(rel='stylesheet', href='http://coolcloud.mote.org/glider_pilot/public/stylesheets/jquery.css')
+        link(rel='stylesheet', href='http://coolcloud.mote.org/glider_pilot/public/stylesheets/gp.css')
+        script(type='text/javascript', src='http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js')
+        script(type='text/javascript', src='http://coolcloud.mote.org/glider_pilot/public/javascripts/submit.js')
+    body
+        div(id='header',align='center')
+            h2=title
+            input(type='button', id='newButton',name='button', value='New Entry',onclick='javascript:submitForm()')
+            p
+        //run coffeescript in -c mode to compile to native .js
+        //and then run via node instead of coffee
+        div(id='spacer')
+        div(id='control_bar')
+        div(id='spacer')
+        div(id='body',align='center')
+            table
+                th Date-Time
+                th Glider
+                th Pilot
+                th Category
+                th Comment
+                - each record in records
+                    tr
+                        td(width='40%;')= record.epochtime
+                        td(width='5%;')= record.vehicle
+                        td(width='5%;')=  record.pilot
+                        td(width='5%;')=  record.category
+                        td(width='50%;')= record.logentry
+         div(id='subForm')
+            form(action='http://coolcloud.mote.org:5001', method='post')
+                table
+                    tr
+                        td(width='20%;')
+                            b='Vehicle: '
+                            select(name='vehicle')
+                                option(value='waldo') waldo
+                                option(value='bass') usf-bass
+                        td(width='20%;')
+                            b='Pilot: '
+                            select(name='pilot')
+                                option(value='kellie') Kellie
+                                option(value='jordon') Jordon
+                                option(value='michael') Michael
+                                option(value='usf') USF
+                        td(width='20%;')
+                            b='Category: '
+                             select(name='category')
+                                option(value='vehicle') Vehicle
+                                option(value='navigation') Navigation
+                                option(value='forecast') Forecast
+                                option(value='deployment') Deployment
+                                option(value='recovery') Recovery
+                                option(value='configuration') Configuration
+                                option(value='sysadmin') System Administration
+
+                    tr
+                p
+                center
+                    b='Logbook Entry'
+                textarea(name='logEntry',rows='8',value='logEntry')
+                center
+                    input(type='submit',value='Post Log Entry')
+                    input(type='reset',value='Reset')
+
